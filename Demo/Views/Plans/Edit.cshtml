@@ -1,0 +1,73 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+@model Model.plans
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>计划编辑</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <style>
+        body {
+            background-color: cadetblue;
+            margin-top: 20px;
+        }
+
+        #a {
+            margin: 270px 0 0 40px;
+            color: darkblue;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>  
+    <form action="/Plans/Edit" method="post">
+        <div class="container">
+            <h3 class="text-center" style="margin-left:80px">计划编辑</h3>
+            @Html.Hidden("pid")
+            <div class="row form-group">
+                <div class="col-md-6 col-md-push-3">
+                    <div class="col-md-3 col-md-push-1" style=""><h4>计划标题</h4></div>
+                    <div class="col-md-8">
+                        @Html.TextBox("pname", null, new { @class = "form-control", @placeholder = "请输入计划标题" })
+                        @Html.ValidationMessageFor(m => m.pname, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-6 col-md-push-3">
+                    <div class="col-md-3 col-md-push-1" style=""><h4>计划时间</h4></div>
+                    <div class="col-md-8">
+                        <input type="date" name="ptime" value="@Model.ptime.ToString("yyyy-MM-dd")" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-6 col-md-push-3">
+                    <div class="col-md-3 col-md-push-1" style=""><h4>计划内容</h4></div>
+                    <div class="col-md-8">
+                        @Html.TextArea("pmark", null, new { @class = "form-control", @placeholder = "请输入计划内容" })
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-md-6 col-md-push-6">
+                    <button type="submit" class="btn btn-default btn-lg">
+                        保存
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="a">
+            @Html.ActionLink("返回主页", "Index", "Plans")
+        </div>
+       </form>
+</body>
+</html>

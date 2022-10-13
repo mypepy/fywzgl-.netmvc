@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Main.cshtml";
+}
+
+@model List<Model.users>
+<div style="height:500px">
+    <form action="/Users/Index" method="get">
+        <table border="1" id="utable" class="table table-bordered">
+            <caption style="color:black">用户管理</caption>
+            <thead>
+                <tr>
+                    <td colspan="7">
+                        <input type="text" placeholder="请输入用户名" name="SearchUname" value="@ViewBag.SearchUname"/><button type="submit">查询</button>
+                        <a href="/Users/Edit" class="btn btn-primary btn-sm pull-right">添加</a>
+
+                    </td>
+
+                </tr>
+                <tr>
+                    <th>
+                        用户名
+                    </th>
+                    <th>
+                        密码
+                    </th>
+                    <th>
+                        性别
+                    </th>
+                    <th>
+                        年龄
+                    </th>
+                    <th>
+                        生日
+                    </th>
+                    <th>
+                        邮箱
+                    </th>
+                    <th>
+                        电话
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>@item.uname</td>
+                        <td>@item.pwd</td>
+                        <td>@item.sex</td>
+                        <td>@item.age</td>
+                        <td>@item.birth.ToString("yyyy-MM-dd")</td>
+                        <td>@item.email</td>
+                        <td>@item.tel</td>
+                        <td>
+                            <a href="/Users/Edit?uid=@item.uid" class="btn btn-primary btn-sm">编辑</a> &nbsp;&nbsp;
+                            <a href="/Users/Delete?uid=@item.uid" onclick="return confirm('你是要注销该用户！')" class="btn btn-danger btn-sm">注销</a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+    </form>
+    @Html.Partial("~/views/shared/Fenye.cshtml")
+</div>
+
+
+
+
+

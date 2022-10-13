@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Main.cshtml";
+}
+@model List<Model.plans>
+<div style="height:500px">
+    <form action="/Plans/Index" method="get">
+        <table border="1" id="utable" class="table table-bordered">
+            <caption style="color:black">计划管理</caption>
+            <thead>
+                <tr>
+
+                    <td colspan="3">
+                        <input type="text" placeholder="请输入计划标题" name="SearchPname" value="@ViewBag.SearchPname" /><button type="submit">查询</button>
+                        <a href="/Plans/Edit" class="btn btn-primary btn-sm pull-right">添加</a>
+                    </td>
+
+                </tr>
+                <tr>
+                    <th>
+                        计划标题
+                    </th>
+                    <th>
+                        计划时间
+                    </th>
+                    <th>
+                        计划内容
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>@item.pname</td>
+                        <td>@item.ptime.ToString("yyyy-MM-dd")</td>
+                        <td>@item.pmark</td>
+
+                        <td>
+                            <a href="/Plans/Edit?pid=@item.pid" class="btn btn-primary btn-sm">编辑</a> &nbsp;&nbsp;
+                            <a href="/Plans/Delete?pid=@item.pid" onclick="return confirm('你是否已完成该计划？')" class="btn btn-danger btn-sm">结束</a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+    </form>
+
+    @Html.Partial("~/views/shared/Fenye.cshtml")
+</div>

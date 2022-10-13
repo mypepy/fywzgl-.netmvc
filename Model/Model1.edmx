@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="goods">
+          <Key>
+            <PropertyRef Name="gid" />
+          </Key>
+          <Property Name="gid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="gname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="img" Type="varchar" MaxLength="500" />
+          <Property Name="source" Type="varchar" MaxLength="20" />
+          <Property Name="num" Type="int" Nullable="false" />
+          <Property Name="unit" Type="varchar" MaxLength="20" />
+          <Property Name="gremark" Type="varchar" MaxLength="50" />
+          <Property Name="tid" Type="int" />
+        </EntityType>
+        <EntityType Name="plans">
+          <Key>
+            <PropertyRef Name="pid" />
+          </Key>
+          <Property Name="pid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="ptime" Type="datetime" Nullable="false" />
+          <Property Name="pmark" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="type">
+          <Key>
+            <PropertyRef Name="tid" />
+          </Key>
+          <Property Name="tid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="createdate" Type="datetime" />
+          <Property Name="editdate" Type="datetime" />
+          <Property Name="tremark" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="uid" />
+          </Key>
+          <Property Name="uid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="uname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="pwd" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="sex" Type="char" MaxLength="2" />
+          <Property Name="age" Type="int" />
+          <Property Name="birth" Type="datetime" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="30" />
+          <Property Name="tel" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__goods__tid__173876EA">
+          <End Role="type" Type="Self.type" Multiplicity="0..1" />
+          <End Role="goods" Type="Self.goods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="type">
+              <PropertyRef Name="tid" />
+            </Principal>
+            <Dependent Role="goods">
+              <PropertyRef Name="tid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MMModelStoreContainer">
+          <EntitySet Name="goods" EntityType="Self.goods" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="plans" EntityType="Self.plans" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="type" EntityType="Self.type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__goods__tid__173876EA" Association="Self.FK__goods__tid__173876EA">
+            <End Role="type" EntitySet="type" />
+            <End Role="goods" EntitySet="goods" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="goods">
+          <Key>
+            <PropertyRef Name="gid" />
+          </Key>
+          <Property Name="gid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="gname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="img" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="source" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="num" Type="Int32" Nullable="false" />
+          <Property Name="unit" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="gremark" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tid" Type="Int32" />
+          <NavigationProperty Name="type" Relationship="Self.FK__goods__tid__06CD04F7" FromRole="goods" ToRole="type" />
+        </EntityType>
+        <EntityType Name="plans">
+          <Key>
+            <PropertyRef Name="pid" />
+          </Key>
+          <Property Name="pid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ptime" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="pmark" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="type">
+          <Key>
+            <PropertyRef Name="tid" />
+          </Key>
+          <Property Name="tid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="createdate" Type="DateTime" Precision="3" />
+          <Property Name="editdate" Type="DateTime" Precision="3" />
+          <Property Name="tremark" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="goods" Relationship="Self.FK__goods__tid__06CD04F7" FromRole="type" ToRole="goods" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="uid" />
+          </Key>
+          <Property Name="uid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="uname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pwd" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sex" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="age" Type="Int32" />
+          <Property Name="birth" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="tel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK__goods__tid__06CD04F7">
+          <End Role="type" Type="Self.type" Multiplicity="0..1" />
+          <End Role="goods" Type="Self.goods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="type">
+              <PropertyRef Name="tid" />
+            </Principal>
+            <Dependent Role="goods">
+              <PropertyRef Name="tid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MMEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="goods" EntityType="Self.goods" />
+          <EntitySet Name="plans" EntityType="Self.plans" />
+          <EntitySet Name="type" EntityType="Self.type" />
+          <EntitySet Name="users" EntityType="Self.users" />
+          <AssociationSet Name="FK__goods__tid__06CD04F7" Association="Self.FK__goods__tid__06CD04F7">
+            <End Role="type" EntitySet="type" />
+            <End Role="goods" EntitySet="goods" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MMModelStoreContainer" CdmEntityContainer="MMEntities">
+          <EntitySetMapping Name="goods">
+            <EntityTypeMapping TypeName="MMModel.goods">
+              <MappingFragment StoreEntitySet="goods">
+                <ScalarProperty Name="gid" ColumnName="gid" />
+                <ScalarProperty Name="gname" ColumnName="gname" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="source" ColumnName="source" />
+                <ScalarProperty Name="num" ColumnName="num" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="gremark" ColumnName="gremark" />
+                <ScalarProperty Name="tid" ColumnName="tid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="plans">
+            <EntityTypeMapping TypeName="MMModel.plans">
+              <MappingFragment StoreEntitySet="plans">
+                <ScalarProperty Name="pid" ColumnName="pid" />
+                <ScalarProperty Name="pname" ColumnName="pname" />
+                <ScalarProperty Name="ptime" ColumnName="ptime" />
+                <ScalarProperty Name="pmark" ColumnName="pmark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="type">
+            <EntityTypeMapping TypeName="MMModel.type">
+              <MappingFragment StoreEntitySet="type">
+                <ScalarProperty Name="tid" ColumnName="tid" />
+                <ScalarProperty Name="tname" ColumnName="tname" />
+                <ScalarProperty Name="createdate" ColumnName="createdate" />
+                <ScalarProperty Name="editdate" ColumnName="editdate" />
+                <ScalarProperty Name="tremark" ColumnName="tremark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="MMModel.users">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="uname" ColumnName="uname" />
+                <ScalarProperty Name="pwd" ColumnName="pwd" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="birth" ColumnName="birth" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="tel" ColumnName="tel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

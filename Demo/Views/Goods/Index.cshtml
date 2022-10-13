@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Main.cshtml";
+}
+
+@model List<Model.goods>
+<div style="height:500px">
+
+    <form action="/Goods/Index" method="get">
+        <table border="1" id="utable" class="table table-bordered">
+            <caption style="color:black">物资管理</caption>
+            <thead>
+                <tr>
+                    <td colspan="7">
+                        @Html.DropDownList("tid", null, "请选择")
+                        <input type="text" name="SearchGname" placeholder="请输入物资名" value="@ViewBag.SearchGname"/><button type="submit">查询</button>
+                        <a href="/Goods/Edit" class="btn btn-primary btn-sm pull-right">添加</a>
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <th>
+                        物资名称
+                    </th>
+                    <th>
+                        图片
+                    </th>
+                    <th>
+                        来源
+                    </th>
+                    <th>
+                        数量
+                    </th>
+                    <th>
+                        单位
+                    </th>
+                    <th>
+                        备注
+                    </th>
+                    <th>
+                        类型
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+
+                    <tr>
+
+                        <td>@item.gname</td>
+                        <td><img style="width:150px;height:50px" src="~/img/upload/@item.img" /></td>
+                        <td>@item.source</td>
+                        <td>@item.num</td>
+                        <td>@item.unit</td>
+                        <td>@item.gremark</td>
+                        <td>@item.type.tname</td>
+                        <td>
+                            <a href="/Goods/Edit?gid=@item.gid" class="btn btn-primary btn-sm">编辑</a> &nbsp;&nbsp;
+                            <a href="/Goods/Delete?gid=@item.gid" onclick="return confirm('你是否要清空该库！')" class="btn btn-danger btn-sm">清库</a>
+                        </td>
+                    </tr>
+
+                }
+
+            </tbody>
+
+        </table>
+
+    </form>
+    @Html.Partial("~/views/shared/Fenye.cshtml")
+</div>
